@@ -1,0 +1,45 @@
+banco 
+passo 1 cria o banco 
+
+CREATE DATABASE projeto;
+
+passo 2 cria tabelas 
+
+primeira tabela
+
+use projeto;
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+segunda tabela
+
+use projeto;
+CREATE TABLE noticias (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    conteudo TEXT NOT NULL,
+    imagem VARCHAR(255) NOT NULL,
+    data_publicacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+
+apois cria a segunda tabela use o comando a baixo para altera a tabela e adiciona a coluna categoria
+    ALTER TABLE noticias ADD COLUMN categoria VARCHAR(50) NOT NULL;
+ 
+);
+
+terceira tabela
+
+use projeto;
+CREATE TABLE recuperacao_senha (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    token VARCHAR(100) NOT NULL,
+    data_solicitacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
